@@ -46,3 +46,11 @@ for i in range(len(CSVs)):
     plt.imshow(images[i])
     plt.scatter(tables[i][1], tables[i][0], color='r', marker="+")
     plt.show()
+
+
+# Links
+# Google Search : extract junctions from veins in wing images python
+# https://stackoverflow.com/questions/57128882/image-segmentation-how-to-detect-this-kind-of-vein-junctions-landmarks
+# https://forum.image.sc/t/detecting-and-measuring-gridlines-with-skimage/37738/2 ---> Canny / Hough Approach
+# https://scikit-image.org/docs/dev/auto_examples/edges/plot_line_hough_transform.html
+# https://www.cs.colostate.edu/~cs510/yr2018sp/more_progress/pdfs/cs510_L17_Canny_Hough.pdf
