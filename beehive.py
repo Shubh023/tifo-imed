@@ -66,7 +66,7 @@ def get_intersections(image):
 
     # Post Process on Vessel detection output
     frang_tophat = white_tophat(frang, disk(10))
-    thresh = np.mean(frang_tophat) / 2
+    thresh = np.mean(frang_tophat) / 0.99
     frang_tophat[frang_tophat > thresh] = 1
     frang_tophat[frang_tophat <= thresh] = 0
 
@@ -80,7 +80,7 @@ def get_intersections(image):
 
     # More processing to remove irregularities
     eroded = maxCC_nobcg
-    eroded = sk.morphology.dilation(eroded, disk(1.4))
+    eroded = sk.morphology.dilation(eroded, disk(1.3))
     eroded = sk.morphology.erosion(eroded, disk(1))
     
     # Applying Thin and closing to remove unwanted holes in the wings
@@ -108,7 +108,7 @@ def get_intersections(image):
     gray = rescaled.copy()
     gray = np.float32(gray)
 
-    dst = cv2.cornerHarris(gray, 9, 3, 0.04)
+    dst = cv2.cornerHarris(gray, 9, 3, 0.1)
 
     # result is dilated for marking the corners
     dst = cv2.dilate(dst, None)
@@ -159,12 +159,13 @@ def generate_all_intersection(images, names):
         file_name = OUTPUT + "/" + os.path.splitext(names[i])[0] + ".csv"
         pd.DataFrame(intersection).to_csv(file_name, header=None, index=False)
         
-        
+        '''
         # For Debugging purposes - Load the generated csv and output a scatter plot among with the input image
         csv = pd.read_csv(file_name, header=None).to_numpy()
         plt.imshow(images[i])
         plt.scatter([x[1] for x in csv], [y[0] for y in csv], color='b', marker="o")
         plt.show()
+        '''
     
     text = "\rProgress: [{0}] DONE.".format(">"*20)
     sys.stdout.write(text)
