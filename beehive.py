@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Spyder Editor
-
-This is a temporary script file.
-"""
 import os
 import cv2
 import sys
@@ -19,7 +13,7 @@ from skimage.morphology import disk, white_tophat, area_closing, skeletonize, th
 
 
 # Please Enter the path to the folder in INPUT
-INPUT = "DATA/TEST/"
+INPUT = "Data/TEST/"
 
 # Output folder which is RESULTS by default
 OUTPUT = "RESULTS"
