@@ -2,7 +2,7 @@
 
 ### **Authors** :
 - #### **Login Epita** : ***shubhamkumar.patel***
-- #### **Addresse Epita** : ***shubhamkumar.patel@epita.fr***
+- #### **email Epita** : ***shubhamkumar.patel@epita.fr***
 
 ### Video is available in this Playlist :
 - ### https://youtube.com/playlist?list=
