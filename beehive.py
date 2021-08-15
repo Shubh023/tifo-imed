@@ -49,11 +49,11 @@ def get_intersections(image):
     width = int(img.shape[1] * scale_percent / 100)
     height = int(img.shape[0] * scale_percent / 100)
     dim = (width, height)
-    interpolation = cv2.INTER_CUBIC
+    interpolation = cv2.INTER_AREA
     reduced = cv2.resize(img, dim, interpolation = interpolation)
     
     # Vessel Detection Filters
-    kwargs = {'sigmas': [1, 1.5], 'mode': 'reflect'}
+    kwargs = {'sigmas': range(1, 2, 1), 'mode': 'reflect'}
     img = rgb2gray(reduced) # Converting image to grayscale
     # img_blurred = gaussian(img, sigma=2)
     # img_denoised = median(img, selem=np.ones((5,5)))
@@ -80,12 +80,12 @@ def get_intersections(image):
 
     # More processing to remove irregularities
     eroded = maxCC_nobcg
-    eroded = sk.morphology.dilation(eroded, disk(1.25))
+    eroded = sk.morphology.dilation(eroded, disk(1.55))
     eroded = sk.morphology.erosion(eroded, disk(1))
     
     # Applying Thin and closing to remove unwanted holes in the wings
     thinned = thin(eroded)
-    thinned = sk.morphology.closing(thinned, disk(1.5))
+    thinned = sk.morphology.closing(thinned, disk(1.25))
     skel = thin(thinned)
     
     # Resizing back to the original image dimension
@@ -130,7 +130,6 @@ def get_intersections(image):
     return intersections
 
 """
-
 def generate_all_intersection(images, names):
     for i in range(len(names)):
         intersection = get_intersections(images[i])
