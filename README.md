@@ -1,4 +1,4 @@
-# PROJET TIFO_IMED - BEE_FOR_BEER
+# PROJET TIFO_IMED - BEELIVE
 
 ### **Authors** :
 - #### **Login Epita** : ***shubhamkumar.patel***
