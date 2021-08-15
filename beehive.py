@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 from skimage.color import rgb2gray
 from skimage.filters import meijering, sato, frangi, hessian, gaussian, median
 from skimage.morphology import disk, white_tophat, area_closing, skeletonize, thin, erosion, diamond, cube, ball
+
+
 # Please Enter the path to the folder in INPUT
 INPUT = "Data/TEST/"
 
