@@ -49,11 +49,11 @@ def get_intersections(image):
     width = int(img.shape[1] * scale_percent / 100)
     height = int(img.shape[0] * scale_percent / 100)
     dim = (width, height)
-    interpolation = cv2.INTER_AREA
+    interpolation = cv2.INTER_CUBIC
     reduced = cv2.resize(img, dim, interpolation = interpolation)
     
     # Vessel Detection Filters
-    kwargs = {'sigmas': range(1, 2, 1), 'mode': 'reflect'}
+    kwargs = {'sigmas': [1, 1.5], 'mode': 'reflect'}
     img = rgb2gray(reduced) # Converting image to grayscale
     # img_blurred = gaussian(img, sigma=2)
     # img_denoised = median(img, selem=np.ones((5,5)))
@@ -80,12 +80,12 @@ def get_intersections(image):
 
     # More processing to remove irregularities
     eroded = maxCC_nobcg
-    eroded = sk.morphology.dilation(eroded, disk(1.3))
+    eroded = sk.morphology.dilation(eroded, disk(1.25))
     eroded = sk.morphology.erosion(eroded, disk(1))
     
     # Applying Thin and closing to remove unwanted holes in the wings
     thinned = thin(eroded)
-    thinned = sk.morphology.closing(thinned, disk(2))
+    thinned = sk.morphology.closing(thinned, disk(1.5))
     skel = thin(thinned)
     
     # Resizing back to the original image dimension
@@ -108,13 +108,13 @@ def get_intersections(image):
     gray = rescaled.copy()
     gray = np.float32(gray)
 
-    dst = cv2.cornerHarris(gray, 9, 3, 0.1)
+    dst = cv2.cornerHarris(gray, 25, 3, 0.075)
 
     # result is dilated for marking the corners
     dst = cv2.dilate(dst, None)
 
     # Threshold for an optimal value, it may vary depending on the image.
-    img_thresh = cv2.threshold(dst, 0.25*dst.max(), 255, 0)[1]
+    img_thresh = cv2.threshold(dst, 0.185*dst.max(), 255, 0)[1]
     img_thresh = np.uint8(img_thresh)
 
     # get the matrix with the x and y locations of each centroid
@@ -159,13 +159,14 @@ def generate_all_intersection(images, names):
         file_name = OUTPUT + "/" + os.path.splitext(names[i])[0] + ".csv"
         pd.DataFrame(intersection).to_csv(file_name, header=None, index=False)
         
-        '''
+        
+    
         # For Debugging purposes - Load the generated csv and output a scatter plot among with the input image
         csv = pd.read_csv(file_name, header=None).to_numpy()
         plt.imshow(images[i])
         plt.scatter([x[1] for x in csv], [y[0] for y in csv], color='b', marker="o")
         plt.show()
-        '''
+        
     
     text = "\rProgress: [{0}] DONE.".format(">"*20)
     sys.stdout.write(text)
