@@ -13,8 +13,8 @@ In order to replicated the results the projet can be launched by following the i
 - `source venv/bin/activate`
 - `pip install -r requirements.txt`
 - There are two ways to set the input directory (containning all the input images)
-  - `python3 beehive.py /PATH/TO/INPUT/DIR` pass the input dir path as argument to the script
-  - `python3 beehive.py` you can modify the `INPUT` variable inside the script to set the path to the images directory directly in **beehive.py**)
+  - `python3 beelive.py /PATH/TO/INPUT/DIR` pass the input dir path as argument to the script
+  - `python3 beelive.py` you can modify the `INPUT` variable inside the script to set the path to the images directory directly in **beehive.py**)
 - A directory `RESULTS` will be created and should contain all the `*.csv` files as required.
 
 ### **In the script beehive.py, modify the ***INPUT*** value by entering the path to the directory containning the images**
