@@ -5,7 +5,7 @@
 - #### **email Epita** : ***shubhamkumar.patel@epita.fr***
 
 ### Video is available in this Playlist :
-- ### https://youtube.com/playlist?list=
+- ### https://youtu.be/gX_wIPAY3vs?list=PL4EQh9QTnivqf42219oB7Xs6gTv6_NwTo
 
 
 In order to replicated the results the projet can be launched by following the instruction below:
